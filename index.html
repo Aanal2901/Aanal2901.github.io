@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
+    <title>Aanal Sonara | Robotics & AI Engineer</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">YourName</a>
+            <a href="#" class="logo">AS</a>
             <ul class="nav-menu">
                 <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -22,126 +23,135 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
         <div class="hero-content">
-            <h1>Hi, I'm <span class="highlight">Your Name</span></h1>
-            <p class="subtitle">Full Stack Developer | Problem Solver | Tech Enthusiast</p>
-            <p class="description">I build modern web applications and love turning ideas into reality through code.</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">Aanal</span>
+                    <span class="title-line">Sonara</span>
+                </h1>
+                <p class="hero-subtitle">Engineer II • Software RnD</p>
+                <p class="hero-company">Ideaforge Technology</p>
+                <div class="hero-cta">
+                    <a href="#about" class="btn-primary">Explore My Work</a>
+                    <a href="#contact" class="btn-secondary">Get in Touch</a>
+                </div>
             </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I'm a passionate developer with a love for creating elegant solutions to complex problems. With experience in both frontend and backend development, I enjoy the entire process of bringing ideas to life.</p>
-                    <p>When I'm not coding, you can find me exploring new technologies, contributing to open source, or sharing knowledge with the developer community.</p>
+            <div class="about-grid">
+                <div class="about-image-wrapper">
+                    <div class="image-frame">
+                        <div class="profile-placeholder">
+                            <div class="placeholder-text">Your Photo Here</div>
+                        </div>
+                    </div>
+                    <div class="floating-badge">
+                        <span class="badge-icon">🤖</span>
+                        <span>AI & Robotics</span>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="about-text">
+                        <p class="lead-text">I am deeply passionate about robotics, computer vision, and artificial intelligence.</p>
+                        <p>My interests lie at the intersection of these fields, where I explore how machines perceive and interact with the world around them. I am fascinated by how AI and robotics can be used to solve complex real-world problems.</p>
+                        <p>The field of Computer Vision excites me for its potential to give machines a deeper understanding of their surroundings. Whether it's enhancing scene understanding, navigation, or interaction, I am interested in how one can enable robots to achieve new levels of autonomy.</p>
+                    </div>
+                    <a href="#" class="resume-link">
+                        <span>View Resume/CV</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <!-- Interests, Education, Hobbies Section -->
+    <section id="interests" class="info-cards">
         <div class="container">
-            <h2>Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Project Name 1</h3>
-                        <div class="project-links">
-                            <a href="#" target="_blank">GitHub</a>
-                            <a href="#" target="_blank">Live Demo</a>
-                        </div>
+            <div class="cards-grid">
+                <!-- Interests Card -->
+                <div class="info-card card-interests">
+                    <div class="card-header">
+                        <div class="card-icon">💡</div>
+                        <h3>Interests</h3>
                     </div>
-                    <p>A brief description of what this project does and the technologies used to build it.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
+                    <ul class="card-list">
+                        <li>Artificial Intelligence</li>
+                        <li>Human Machine Interaction</li>
+                        <li>Computer Vision</li>
+                        <li>Autonomous Systems</li>
+                        <li>Hardware</li>
+                        <li>Optimisation</li>
+                    </ul>
+                </div>
+
+                <!-- Education Card -->
+                <div class="info-card card-education" id="education">
+                    <div class="card-header">
+                        <div class="card-icon">🎓</div>
+                        <h3>Education</h3>
+                    </div>
+                    <div class="education-content">
+                        <h4>B. Tech in Electrical Engineering</h4>
+                        <p class="minor">Minor in AI & Data Science</p>
+                        <p class="university">IIT Bombay</p>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Project Name 2</h3>
-                        <div class="project-links">
-                            <a href="#" target="_blank">GitHub</a>
-                            <a href="#" target="_blank">Live Demo</a>
-                        </div>
+                <!-- Hobbies Card -->
+                <div class="info-card card-hobbies">
+                    <div class="card-header">
+                        <div class="card-icon">✨</div>
+                        <h3>Hobbies</h3>
                     </div>
-                    <p>Another exciting project showcasing your skills and problem-solving abilities.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Django</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Project Name 3</h3>
-                        <div class="project-links">
-                            <a href="#" target="_blank">GitHub</a>
-                            <a href="#" target="_blank">Live Demo</a>
-                        </div>
-                    </div>
-                    <p>A creative solution that demonstrates your expertise and attention to detail.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Express</span>
-                        <span class="tech-tag">MySQL</span>
-                    </div>
+                    <ul class="card-list">
+                        <li>Reading novels</li>
+                        <li>Playing Synthesizer</li>
+                        <li>Cooking</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
+    <!-- Projects Section (Placeholder for future) -->
+    <section class="projects">
         <div class="container">
-            <h2>Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <ul>
-                        <li>HTML/CSS</li>
-                        <li>JavaScript</li>
-                        <li>React</li>
-                        <li>Vue.js</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend</h3>
-                    <ul>
-                        <li>Node.js</li>
-                        <li>Python</li>
-                        <li>Express</li>
-                        <li>Django</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Database</h3>
-                    <ul>
-                        <li>MongoDB</li>
-                        <li>PostgreSQL</li>
-                        <li>MySQL</li>
-                        <li>Firebase</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools</h3>
-                    <ul>
-                        <li>Git/GitHub</li>
-                        <li>Docker</li>
-                        <li>VS Code</li>
-                        <li>Postman</li>
-                    </ul>
+            <h2 class="section-title centered">Featured Projects</h2>
+            <p class="section-subtitle">Coming soon - Showcasing my work in robotics, computer vision, and AI</p>
+            <div class="projects-placeholder">
+                <div class="placeholder-grid">
+                    <div class="project-placeholder">
+                        <div class="placeholder-icon">🚁</div>
+                        <h4>Autonomous Drones</h4>
+                        <p>Navigation & perception systems</p>
+                    </div>
+                    <div class="project-placeholder">
+                        <div class="placeholder-icon">👁️</div>
+                        <h4>Computer Vision</h4>
+                        <p>Scene understanding & detection</p>
+                    </div>
+                    <div class="project-placeholder">
+                        <div class="placeholder-icon">🤖</div>
+                        <h4>Robotics Research</h4>
+                        <p>Human-robot interaction</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -150,28 +160,50 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Get In Touch</h2>
-            <p class="contact-intro">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
-            <div class="contact-links">
-                <a href="mailto:your.email@example.com" class="contact-link">
-                    <span>📧</span> Email
-                </a>
-                <a href="https://github.com/yourusername" target="_blank" class="contact-link">
-                    <span>💻</span> GitHub
-                </a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-link">
-                    <span>💼</span> LinkedIn
-                </a>
-                <a href="https://twitter.com/yourusername" target="_blank" class="contact-link">
-                    <span>🐦</span> Twitter
-                </a>
+            <div class="contact-content">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="contact-description">I'm always interested in discussing robotics, AI, and innovative projects. Feel free to reach out!</p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@example.com" class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>your.email@example.com</p>
+                        </div>
+                    </a>
+                    <a href="https://github.com/Aanal2901" class="contact-card">
+                        <div class="contact-icon">💻</div>
+                        <div class="contact-text">
+                            <h4>GitHub</h4>
+                            <p>@Aanal2901</p>
+                        </div>
+                    </a>
+                    <a href="https://linkedin.com/in/yourprofile" class="contact-card">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-text">
+                            <h4>LinkedIn</h4>
+                            <p>Connect with me</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 Your Name. Built with ❤️ and hosted on GitHub Pages.</p>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Aanal Sonara. Crafted with passion for robotics & AI.</p>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#interests">Interests</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
