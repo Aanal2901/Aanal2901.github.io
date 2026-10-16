@@ -1,209 +1,273 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aanal Sonara | Robotics & AI Engineer</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aanal Sonara</title>
+<meta name="description" content="Aanal (Ann) Sonara — MS Robotics at the University of Pennsylvania (GRASP). Event cameras, visual SLAM and perception on real hardware.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F1F3F5;
+    --ink: #18202D;
+    --muted: #586273;
+    --rule: #CDD3DB;
+    --on: #2C57CF;      /* positive polarity */
+    --off: #D23A63;     /* negative polarity */
+    --measure: 40rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10151E; --ink: #E5E8EE; --muted: #9AA3B2; --rule: #2A3242;
+      --on: #7FA2FF; --off: #FF7D9E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10151E; --ink: #E5E8EE; --muted: #9AA3B2; --rule: #2A3242;
+    --on: #7FA2FF; --off: #FF7D9E;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 1.0625rem/1.6 "Schibsted Grotesk", system-ui, sans-serif;
+  }
+  a { color: var(--on); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--on); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: var(--measure); margin: 0 auto; padding: 0 16px; }
+
+  /* Hero: the name, as an event camera would see it */
+  .hero { position: relative; padding-top: clamp(2rem, 8vw, 5rem); }
+  .sensor {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3.4 / 1;
+  }
+  .sensor canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .sensor h1 {
+    position: absolute; inset: 0; margin: 0;
+    display: flex; align-items: center;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 11vw, 5.4rem);
+    line-height: 1; letter-spacing: -0.03em; white-space: nowrap;
+  }
+  .js-live .sensor h1 { color: transparent; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin: 0.25rem 0 0;
+    font-size: 0.8125rem; color: var(--muted);
+  }
+  .legend span { white-space: nowrap; }
+  @media (hover: none) { .legend .hint { display: none; } }
+  .legend span::before {
+    content: ""; display: inline-block; width: 7px; height: 7px;
+    margin-right: 0.45em; vertical-align: 0.1em;
+  }
+  .legend .p::before { background: var(--on); }
+  .legend .n::before { background: var(--off); }
+
+  .intro { font-size: 1.3125rem; line-height: 1.5; margin: 2rem 0 0; }
+  .links { margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: 1.25rem; }
+
+  section { margin-top: 3.5rem; }
+  h2 {
+    font-size: 1rem; font-weight: 700; margin: 0 0 1rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);
+  }
+  .entry { display: grid; grid-template-columns: 11rem 1fr; gap: 0.25rem 1.5rem; margin: 0 0 1.25rem; }
+  .entry h3 { font-size: 1.0625rem; font-weight: 700; margin: 0; }
+  .entry .where { color: var(--muted); font-size: 0.9375rem; margin: 0; }
+  .entry p { margin: 0; }
+  @media (max-width: 560px) {
+    .entry { grid-template-columns: 1fr; }
+    .intro { font-size: 1.1875rem; }
+  }
+
+  footer { margin: 4.5rem 0 2.5rem; color: var(--muted); font-size: 0.875rem; }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">AS</a>
-            <ul class="nav-menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#interests">Interests</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<main class="wrap">
+  <header class="hero">
+    <div class="sensor" id="sensor">
+      <canvas id="events" aria-hidden="true"></canvas>
+      <h1>Aanal Sonara</h1>
+    </div>
+    <p class="legend" aria-hidden="true"><span class="p">brighter</span><span class="n">darker</span><span class="hint">move your cursor to move the camera</span></p>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <span class="title-line">Aanal</span>
-                    <span class="title-line">Sonara</span>
-                </h1>
-                <p class="hero-subtitle">Engineer II • Software RnD</p>
-                <p class="hero-company">Ideaforge Technology</p>
-                <div class="hero-cta">
-                    <a href="#about" class="btn-primary">Explore My Work</a>
-                    <a href="#contact" class="btn-secondary">Get in Touch</a>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
+    <p class="intro">I build perception that holds up on real hardware: visual SLAM on drones, real-time detection at the edge, and now event cameras. I'm a second-year MS Robotics student at Penn, working in Pratik Chaudhari's group at GRASP.</p>
+    <p class="links">
+      <a href="https://github.com/Aanal2901">GitHub</a>
+    </p>
+  </header>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image-wrapper">
-                    <div class="image-frame">
-                        <div class="profile-placeholder">
-                            <div class="placeholder-text">Your Photo Here</div>
-                        </div>
-                    </div>
-                    <div class="floating-badge">
-                        <span class="badge-icon">🤖</span>
-                        <span>AI & Robotics</span>
-                    </div>
-                </div>
-                <div class="about-content">
-                    <h2 class="section-title">About Me</h2>
-                    <div class="about-text">
-                        <p class="lead-text">I am deeply passionate about robotics, computer vision, and artificial intelligence.</p>
-                        <p>My interests lie at the intersection of these fields, where I explore how machines perceive and interact with the world around them. I am fascinated by how AI and robotics can be used to solve complex real-world problems.</p>
-                        <p>The field of Computer Vision excites me for its potential to give machines a deeper understanding of their surroundings. Whether it's enhancing scene understanding, navigation, or interaction, I am interested in how one can enable robots to achieve new levels of autonomy.</p>
-                    </div>
-                    <a href="#" class="resume-link">
-                        <span>View Resume/CV</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section aria-labelledby="research">
+    <h2 id="research">Research</h2>
+    <div class="entry">
+      <div><h3>Event cameras for SLAM</h3></div>
+      <p>Foundational encoders for event-camera data that can feed a SLAM front end. My current pipeline turns raw event streams into COLMAP-ready sparse reconstructions in C++, then fits edge Gaussians on adaptively filtered event images.</p>
+    </div>
+    <div class="entry">
+      <div><h3>Optical-flow VIO</h3><p class="where">Perception Group, GRASP</p></div>
+      <p>Visual-inertial odometry driven by optical flow, with Prof. Pratik Chaudhari.</p>
+    </div>
+  </section>
 
-    <!-- Interests, Education, Hobbies Section -->
-    <section id="interests" class="info-cards">
-        <div class="container">
-            <div class="cards-grid">
-                <!-- Interests Card -->
-                <div class="info-card card-interests">
-                    <div class="card-header">
-                        <div class="card-icon">💡</div>
-                        <h3>Interests</h3>
-                    </div>
-                    <ul class="card-list">
-                        <li>Artificial Intelligence</li>
-                        <li>Human Machine Interaction</li>
-                        <li>Computer Vision</li>
-                        <li>Autonomous Systems</li>
-                        <li>Hardware</li>
-                        <li>Optimisation</li>
-                    </ul>
-                </div>
+  <section aria-labelledby="experience">
+    <h2 id="experience">Experience</h2>
+    <div class="entry">
+      <div><h3>Skydio</h3><p class="where">Intern</p></div>
+      <p>Real-time open-vocabulary object detection and tracking models, deployed in the cloud.</p>
+    </div>
+    <div class="entry">
+      <div><h3>IdeaForge Technology</h3><p class="where">Engineer II, Software R&amp;D</p></div>
+      <p>Production visual SLAM and TensorRT-optimized perception running on UAVs.</p>
+    </div>
+    <div class="entry">
+      <div><h3>Sony</h3><p class="where">Japan</p></div>
+      <p>Integrated ORB-SLAM3.</p>
+    </div>
+  </section>
 
-                <!-- Education Card -->
-                <div class="info-card card-education" id="education">
-                    <div class="card-header">
-                        <div class="card-icon">🎓</div>
-                        <h3>Education</h3>
-                    </div>
-                    <div class="education-content">
-                        <h4>B. Tech in Electrical Engineering</h4>
-                        <p class="minor">Minor in AI & Data Science</p>
-                        <p class="university">IIT Bombay</p>
-                    </div>
-                </div>
+  <section aria-labelledby="projects">
+    <h2 id="projects">Projects</h2>
+    <div class="entry">
+      <div><h3>Any6DAgent</h3></div>
+      <p>Pick-and-place in MuJoCo: FoundationPose 6-DoF pose estimates drive a waypoint state machine on a Franka arm.</p>
+    </div>
+    <div class="entry">
+      <div><h3>F1TENTH overtaking</h3></div>
+      <p>A reinforcement-learning overtaking policy layered on a Pure Pursuit controller for autonomous racing, with Zhixin Yin.</p>
+    </div>
+  </section>
 
-                <!-- Hobbies Card -->
-                <div class="info-card card-hobbies">
-                    <div class="card-header">
-                        <div class="card-icon">✨</div>
-                        <h3>Hobbies</h3>
-                    </div>
-                    <ul class="card-list">
-                        <li>Reading novels</li>
-                        <li>Playing Synthesizer</li>
-                        <li>Cooking</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section aria-labelledby="education">
+    <h2 id="education">Education</h2>
+    <div class="entry">
+      <div><h3>University of Pennsylvania</h3><p class="where">Expected May 2027</p></div>
+      <p>MS in Robotics, GRASP Lab. Teaching assistant for CIS 5800.</p>
+    </div>
+    <div class="entry">
+      <div><h3>IIT Bombay</h3><p class="where">2023</p></div>
+      <p>B.Tech in Electrical Engineering, minor in AI &amp; Data Science. Overall Coordinator of UMIC; competed at IARC, F1TENTH and AUVSI.</p>
+    </div>
+  </section>
 
-    <!-- Projects Section (Placeholder for future) -->
-    <section class="projects">
-        <div class="container">
-            <h2 class="section-title centered">Featured Projects</h2>
-            <p class="section-subtitle">Coming soon - Showcasing my work in robotics, computer vision, and AI</p>
-            <div class="projects-placeholder">
-                <div class="placeholder-grid">
-                    <div class="project-placeholder">
-                        <div class="placeholder-icon">🚁</div>
-                        <h4>Autonomous Drones</h4>
-                        <p>Navigation & perception systems</p>
-                    </div>
-                    <div class="project-placeholder">
-                        <div class="placeholder-icon">👁️</div>
-                        <h4>Computer Vision</h4>
-                        <p>Scene understanding & detection</p>
-                    </div>
-                    <div class="project-placeholder">
-                        <div class="placeholder-icon">🤖</div>
-                        <h4>Robotics Research</h4>
-                        <p>Human-robot interaction</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer>Updated October 2026</footer>
+</main>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <h2 class="section-title">Let's Connect</h2>
-                <p class="contact-description">I'm always interested in discussing robotics, AI, and innovative projects. Feel free to reach out!</p>
-                <div class="contact-links">
-                    <a href="mailto:your.email@example.com" class="contact-card">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-text">
-                            <h4>Email</h4>
-                            <p>your.email@example.com</p>
-                        </div>
-                    </a>
-                    <a href="https://github.com/Aanal2901" class="contact-card">
-                        <div class="contact-icon">💻</div>
-                        <div class="contact-text">
-                            <h4>GitHub</h4>
-                            <p>@Aanal2901</p>
-                        </div>
-                    </a>
-                    <a href="https://linkedin.com/in/yourprofile" class="contact-card">
-                        <div class="contact-icon">💼</div>
-                        <div class="contact-text">
-                            <h4>LinkedIn</h4>
-                            <p>Connect with me</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+<script>
+(() => {
+  const box = document.getElementById('sensor');
+  const cv = document.getElementById('events');
+  const ctx = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NAME = 'Aanal Sonara';
+  let W, H, dpr, edges = [], colors = {};
+  let vx = 1, vy = 0.35, t = 0, lastMove = 0;
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2024 Aanal Sonara. Crafted with passion for robotics & AI.</p>
-                <div class="footer-links">
-                    <a href="#about">About</a>
-                    <a href="#interests">Interests</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+  function readColors() {
+    const s = getComputedStyle(document.documentElement);
+    colors.bg = s.getPropertyValue('--bg').trim();
+    colors.on = s.getPropertyValue('--on').trim();
+    colors.off = s.getPropertyValue('--off').trim();
+  }
 
-    <script src="script.js"></script>
+  // Render the name off-screen, keep pixels on its outline with their gradient direction.
+  function buildEdges() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const r = box.getBoundingClientRect();
+    W = Math.round(r.width * dpr); H = Math.round(r.height * dpr);
+    cv.width = W; cv.height = H;
+    const h1 = box.querySelector('h1');
+    const fs = parseFloat(getComputedStyle(h1).fontSize) * dpr;
+    const off = document.createElement('canvas');
+    off.width = W; off.height = H;
+    const o = off.getContext('2d');
+    o.font = `800 ${fs}px "Schibsted Grotesk", system-ui, sans-serif`;
+    if (o.letterSpacing !== undefined) o.letterSpacing = `${-0.03 * fs}px`;
+    o.textBaseline = 'middle';
+    o.fillStyle = '#000';
+    o.fillText(NAME, 0, H / 2);
+    const a = o.getImageData(0, 0, W, H).data;
+    const A = (x, y) => a[(y * W + x) * 4 + 3];
+    edges = [];
+    const step = dpr > 1 ? 2 : 1;
+    for (let y = 1; y < H - 1; y += step) {
+      for (let x = 1; x < W - 1; x += step) {
+        const gx = A(x + 1, y) - A(x - 1, y);
+        const gy = A(x, y + 1) - A(x, y - 1);
+        const m = Math.hypot(gx, gy);
+        if (m > 60) edges.push(x, y, gx / m, gy / m);
+      }
+    }
+    ctx.fillStyle = colors.bg;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // One sensor tick: edges fire in proportion to how much they face the motion.
+  function tick(n, fade) {
+    if (fade) { ctx.globalAlpha = fade; ctx.fillStyle = colors.bg; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1; }
+    const sz = Math.max(1.5, dpr * 1.6);
+    const count = edges.length / 4;
+    if (!count) return;
+    for (let i = 0; i < n; i++) {
+      const k = (Math.random() * count | 0) * 4;
+      const d = edges[k + 2] * vx + edges[k + 3] * vy;
+      if (Math.random() > Math.abs(d)) continue;
+      ctx.fillStyle = d > 0 ? colors.on : colors.off;
+      ctx.fillRect(edges[k] + (Math.random() - 0.5) * 2 * dpr, edges[k + 1] + (Math.random() - 0.5) * 2 * dpr, sz, sz);
+    }
+    // sparse background noise, as on a real sensor
+    for (let i = 0; i < 3; i++) {
+      ctx.fillStyle = Math.random() < 0.5 ? colors.on : colors.off;
+      ctx.globalAlpha = 0.35;
+      ctx.fillRect(Math.random() * W, Math.random() * H, sz, sz);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function loop(now) {
+    // drift slowly unless the visitor is steering
+    if (now - lastMove > 1200) {
+      t += 0.004;
+      vx += (Math.cos(t) - vx) * 0.02;
+      vy += (Math.sin(t * 1.3) * 0.8 - vy) * 0.02;
+    }
+    tick(2600, 0.14);
+    requestAnimationFrame(loop);
+  }
+
+  function start() {
+    readColors();
+    buildEdges();
+    if (!edges.length) return;              // leave the plain heading visible
+    document.documentElement.classList.add('js-live');
+    if (reduce) { for (let i = 0; i < 4; i++) tick(9000, 0); return; }
+    requestAnimationFrame(loop);
+  }
+
+  let px = null, py = null;
+  window.addEventListener('pointermove', e => {
+    if (px !== null) {
+      const dx = e.clientX - px, dy = e.clientY - py, m = Math.hypot(dx, dy);
+      if (m > 1) { vx = dx / m; vy = dy / m; lastMove = performance.now(); }
+    }
+    px = e.clientX; py = e.clientY;
+  }, { passive: true });
+
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { buildEdges(); if (reduce) for (let i = 0; i < 4; i++) tick(9000, 0); }, 150); });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readColors(); buildEdges(); });
+
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(start);
+})();
+</script>
 </body>
 </html>
