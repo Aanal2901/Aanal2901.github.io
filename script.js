@@ -1,102 +1,117 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+// Section menu: close on outside click or Escape
+(() => {
+  const menu = document.querySelector('.menu');
+  if (!menu) return;
+  document.addEventListener('click', e => { if (!menu.contains(e.target)) menu.open = false; });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
+  });
+})();
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// Homepage hero: event-camera rendering of the name
+(() => {
+  const box = document.getElementById('sensor');
+  if (!box) return;
+  const cv = document.getElementById('events');
+  const ctx = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NAME = 'Aanal Sonara';
+  let W, H, dpr, edges = [], colors = {};
+  let vx = 1, vy = 0.35, t = 0, lastMove = 0;
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
+  function readColors() {
+    const s = getComputedStyle(document.documentElement);
+    colors.bg = s.getPropertyValue('--bg').trim();
+    colors.on = s.getPropertyValue('--on').trim();
+    colors.off = s.getPropertyValue('--off').trim();
+  }
 
-// Observe all cards and sections for animation
-document.querySelectorAll('.info-card, .project-placeholder, .contact-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// Navbar background on scroll
-let lastScroll = 0;
-const navbar = document.querySelector('.navbar');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        navbar.style.background = 'rgba(15, 15, 30, 0.95)';
-        navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.3)';
-    } else {
-        navbar.style.background = 'rgba(15, 15, 30, 0.8)';
-        navbar.style.boxShadow = 'none';
+  // Render the name off-screen, keep pixels on its outline with their gradient direction.
+  function buildEdges() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const r = box.getBoundingClientRect();
+    W = Math.round(r.width * dpr); H = Math.round(r.height * dpr);
+    cv.width = W; cv.height = H;
+    const h1 = box.querySelector('h1');
+    const fs = parseFloat(getComputedStyle(h1).fontSize) * dpr;
+    const off = document.createElement('canvas');
+    off.width = W; off.height = H;
+    const o = off.getContext('2d');
+    o.font = `800 ${fs}px "Schibsted Grotesk", system-ui, sans-serif`;
+    if (o.letterSpacing !== undefined) o.letterSpacing = `${-0.03 * fs}px`;
+    o.textBaseline = 'middle';
+    o.fillStyle = '#000';
+    o.fillText(NAME, 0, H / 2);
+    const a = o.getImageData(0, 0, W, H).data;
+    const A = (x, y) => a[(y * W + x) * 4 + 3];
+    edges = [];
+    const step = dpr > 1 ? 2 : 1;
+    for (let y = 1; y < H - 1; y += step) {
+      for (let x = 1; x < W - 1; x += step) {
+        const gx = A(x + 1, y) - A(x - 1, y);
+        const gy = A(x, y + 1) - A(x, y - 1);
+        const m = Math.hypot(gx, gy);
+        if (m > 60) edges.push(x, y, gx / m, gy / m);
+      }
     }
-    
-    lastScroll = currentScroll;
-});
+    ctx.fillStyle = colors.bg;
+    ctx.fillRect(0, 0, W, H);
+  }
 
-// Parallax effect for gradient orbs
-window.addEventListener('mousemove', (e) => {
-    const orbs = document.querySelectorAll('.gradient-orb');
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
-    
-    orbs.forEach((orb, index) => {
-        const speed = (index + 1) * 20;
-        const xMove = (x - 0.5) * speed;
-        const yMove = (y - 0.5) * speed;
-        
-        orb.style.transform = `translate(${xMove}px, ${yMove}px)`;
-    });
-});
+  // One sensor tick: edges fire in proportion to how much they face the motion.
+  function tick(n, fade) {
+    if (fade) { ctx.globalAlpha = fade; ctx.fillStyle = colors.bg; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1; }
+    const sz = Math.max(1.5, dpr * 1.6);
+    const count = edges.length / 4;
+    if (!count) return;
+    for (let i = 0; i < n; i++) {
+      const k = (Math.random() * count | 0) * 4;
+      const d = edges[k + 2] * vx + edges[k + 3] * vy;
+      if (Math.random() > Math.abs(d)) continue;
+      ctx.fillStyle = d > 0 ? colors.on : colors.off;
+      ctx.fillRect(edges[k] + (Math.random() - 0.5) * 2 * dpr, edges[k + 1] + (Math.random() - 0.5) * 2 * dpr, sz, sz);
+    }
+    // sparse background noise, as on a real sensor
+    for (let i = 0; i < 3; i++) {
+      ctx.fillStyle = Math.random() < 0.5 ? colors.on : colors.off;
+      ctx.globalAlpha = 0.35;
+      ctx.fillRect(Math.random() * W, Math.random() * H, sz, sz);
+      ctx.globalAlpha = 1;
+    }
+  }
 
-// Add stagger animation to list items
-document.querySelectorAll('.card-list').forEach(list => {
-    const items = list.querySelectorAll('li');
-    items.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(-20px)';
-        item.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
-    });
-    
-    observer.observe(list);
-    
-    // When list is visible, animate items
-    const listObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const listItems = entry.target.querySelectorAll('li');
-                listItems.forEach(item => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateX(0)';
-                });
-                listObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    listObserver.observe(list);
-});
+  function loop(now) {
+    // drift slowly unless the visitor is steering
+    if (now - lastMove > 1200) {
+      t += 0.004;
+      vx += (Math.cos(t) - vx) * 0.02;
+      vy += (Math.sin(t * 1.3) * 0.8 - vy) * 0.02;
+    }
+    tick(2600, 0.14);
+    requestAnimationFrame(loop);
+  }
 
-// Console Easter Egg
-console.log('%c👋 Hi there!', 'font-size: 2rem; font-weight: bold; color: #ff6b9d;');
-console.log('%cLooking at the code? I like your curiosity! 🚀', 'font-size: 1.2rem; color: #4ecdc4;');
-console.log('%cFeel free to reach out if you want to collaborate on something awesome!', 'font-size: 1rem; color: #a8a8b8;');
+  function start() {
+    readColors();
+    buildEdges();
+    if (!edges.length) return;              // leave the plain heading visible
+    document.documentElement.classList.add('js-live');
+    if (reduce) { for (let i = 0; i < 4; i++) tick(9000, 0); return; }
+    requestAnimationFrame(loop);
+  }
+
+  let px = null, py = null;
+  window.addEventListener('pointermove', e => {
+    if (px !== null) {
+      const dx = e.clientX - px, dy = e.clientY - py, m = Math.hypot(dx, dy);
+      if (m > 1) { vx = dx / m; vy = dy / m; lastMove = performance.now(); }
+    }
+    px = e.clientX; py = e.clientY;
+  }, { passive: true });
+
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { buildEdges(); if (reduce) for (let i = 0; i < 4; i++) tick(9000, 0); }, 150); });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readColors(); buildEdges(); });
+
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(start);
+})();

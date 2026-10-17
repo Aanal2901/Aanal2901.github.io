@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master's | Aanal Sonara</title>
+<meta name="description" content="MS in Robotics at the University of Pennsylvania, 2025–2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="topbar" aria-label="Site">
+    <a class="home" href="index.html">Aanal Sonara</a>
+    <details class="menu">
+      <summary>Explore</summary>
+      <ul>
+        <li><a href="masters.html" aria-current="page">Master's<span>2027</span></a></li>
+        <li><a href="experience.html">Professional Experience</a></li>
+        <li><a href="undergrad.html">Undergrad<span>2023</span></a></li>
+        <li><a href="side-quests.html">Side quests</a></li>
+      </ul>
+    </details>
+  </nav>
+  <main>
+  <header class="page-head">
+    <h1>Master's</h1>
+  </header>
+  <section aria-labelledby="m-edu">
+    <h2 id="m-edu">Education</h2>
+    <article class="entry" id="penn">
+      <p class="when">2025–2027</p>
+      <div>
+        <h3>MS Robotics, University of Pennsylvania</h3>
+        <p class="where">GPA 4.0 / 4.0</p>
+        <p>Coursework: Neural Representations &amp; Neural Scene Rendering, Learning in Robotics, F1/10 Autonomous Racing, Machine Perception, Introduction to Robotics, Computer Vision &amp; Computational Photography.</p>
+      </div>
+    </article>
+  </section>
+  <section aria-labelledby="m-research">
+    <h2 id="m-research">Research</h2>
+    <article class="entry" id="deep-event-slam">
+      <p class="when">Jan–May 2026</p>
+      <div>
+        <h3>Deep Event SLAM</h3>
+        <p class="where">Prof. Pratik Chaudhari, Perception Group, GRASP</p>
+        <ul>
+          <li>Adapted a 3D Gaussian Splat-based edge reconstruction model to event data with sparse 2D edge supervision</li>
+          <li>Converted asynchronous events into edge images with an adaptive exponential-decay filter and the PidiNet edge detector</li>
+          <li>Built a parametric edge extraction pipeline by clustering 3D Gaussian points and fitting Bézier curves per cluster</li>
+          <li>Evaluated the pipeline on Habitat and UZH-FPV drone racing datasets, comparing RGB and event input</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+  <section aria-labelledby="m-projects">
+    <h2 id="m-projects">Projects</h2>
+    <article class="entry" id="f1tenth">
+      <p class="when">Jan–May 2026</p>
+      <div>
+        <h3>F1/10 race overtaking with RL</h3>
+        <p class="where">Prof. Rahul Mangharam</p>
+        <ul>
+          <li>Built a 2D LiDAR local occupancy grid and a Bresenham line collision detector for obstacle detection</li>
+          <li>Designed a hybrid controller that switches from pure pursuit to an RL policy to overtake</li>
+          <li>Validated in simulation and on F1/10 hardware across static and dynamic obstacles and left and right turns: overtaking at up to 4.5 m/s on hardware and 6 m/s in simulation</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="cube-stack">
+      <p class="when">Nov–Dec 2025</p>
+      <div>
+        <h3>Cube pick and stack</h3>
+        <p class="where">Prof. Rachel Holladay</p>
+        <ul>
+          <li>Explored RRT and potential-field motion planning in configuration space in Gazebo</li>
+          <li>Implemented forward and inverse kinematics on a Panda arm to pick static and moving cubes and stack them</li>
+          <li>Calibrated the camera-to-gripper offset on hardware; stacked 4 blocks in 5 minutes</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="graspable">
+      <p class="when">Aug–Dec 2025</p>
+      <div>
+        <h3>Graspable regions from RGB images</h3>
+        <p class="where">Prof. Jianbo Shi</p>
+        <ul>
+          <li>Segmented the target object with SAM2 and estimated pseudo-depth with DepthAnythingV2</li>
+          <li>Built an object mesh with InstantMesh and used Any6D to recover object pose and a scale-corrected mesh</li>
+          <li>Scored mesh vertices into an affordance heatmap to find stable grasp points</li>
+          <li>Paired each grasp point with the diametrically opposite point through the center of mass for a stable grip</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+  <section aria-labelledby="m-teaching">
+    <h2 id="m-teaching">Teaching</h2>
+    <article class="entry" id="ta-cis5810">
+      <p class="when">Fall 2026</p>
+      <div>
+        <h3>CIS 5810 Computer Vision &amp; Computational Photography</h3>
+        <p class="where">Teaching assistant, Prof. Jianbo Shi</p>
+      </div>
+    </article>
+    <article class="entry" id="ta-meam5200">
+      <p class="when">Fall 2026</p>
+      <div>
+        <h3>MEAM 5200 Introduction to Robotics</h3>
+        <p class="where">Teaching assistant, Prof. Rachel Holladay</p>
+      </div>
+    </article>
+    <article class="entry" id="ta-cis5800">
+      <p class="when">Spring 2026</p>
+      <div>
+        <h3>CIS 5800 Machine Perception</h3>
+        <p class="where">Teaching assistant, Prof. Lingjie Liu</p>
+      </div>
+    </article>
+  </section>
+  </main>
+  <footer>
+    <a href="mailto:sonara.aanal@gmail.com">sonara.aanal@gmail.com</a>
+    <a href="https://www.linkedin.com/in/aanal-sonara/">LinkedIn</a>
+    <a href="https://github.com/Aanal2901">GitHub</a>
+    <span>Updated October 2026</span>
+  </footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

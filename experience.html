@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Professional Experience | Aanal Sonara</title>
+<meta name="description" content="Industry roles and internships, from Sony in Tokyo to Skydio in San Mateo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="topbar" aria-label="Site">
+    <a class="home" href="index.html">Aanal Sonara</a>
+    <details class="menu">
+      <summary>Explore</summary>
+      <ul>
+        <li><a href="masters.html">Master's<span>2027</span></a></li>
+        <li><a href="experience.html" aria-current="page">Professional Experience</a></li>
+        <li><a href="undergrad.html">Undergrad<span>2023</span></a></li>
+        <li><a href="side-quests.html">Side quests</a></li>
+      </ul>
+    </details>
+  </nav>
+  <main>
+  <header class="page-head">
+    <h1>Professional Experience</h1>
+  </header>
+  <section aria-labelledby="x-work">
+    <h2 id="x-work">Roles</h2>
+    <article class="entry" id="skydio">
+      <p class="when">May–Aug 2026</p>
+      <div>
+        <h3>Autonomy Intern, Skydio</h3>
+        <p class="where">San Mateo, USA</p>
+        <p>Open-vocabulary object search and tracking, running in real time in the cloud.</p>
+        <ul>
+          <li>Implemented SAM3 detector and tracker modules, and paired the OWLv2 detector with the SAM3 tracker for benchmarking</li>
+          <li>Redesigned the SAM3 tracker's state machine to track on streaming video by maintaining groups of detections</li>
+          <li>Wrote evaluation code to benchmark every detector and tracker variant on specific prompt concepts</li>
+          <li>Reached F1 0.67 at mIoU 0.88 on 10 concept prompts (640×360, 1.5 fps); deployed to the cloud</li>
+          <li>Led data collection across 24 flights at 3 sites and annotation of 10k+ object instances from 10 concepts</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="ideaforge">
+      <p class="when">Apr 2024–Aug 2025</p>
+      <div>
+        <h3>Engineer II, IdeaForge Technology</h3>
+        <p class="where">Bangalore, India</p>
+        <p>Perception for GNSS-denied flight on the Netra 5 and Q6 V2 UAVs.</p>
+        <ul>
+          <li>Deployed day and night visual SLAM on UAVs: RMSE ≤ 5% at 100 m altitude, over ranges up to 10 km</li>
+          <li>Improved V-SLAM RMSE by 3% with map saving and feature reuse over flight paths up to 30 km</li>
+          <li>Built a proof of concept for satellite-image-based navigation that cut relocalization error by 8%</li>
+          <li>Implemented dense 3D reconstruction with Gaussian Splatting, optimized by a new frame-rejection algorithm</li>
+          <li>Presented IdeaForge at ICVGIP 2024 (Indian Conference on Computer Vision, Graphics &amp; Image Processing)</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="enphase">
+      <p class="when">Jul 2023–Mar 2024</p>
+      <div>
+        <h3>Systems Engineer, Enphase Energy</h3>
+        <p class="where">Bangalore, India</p>
+        <p>Energy management systems for solar products, for reliable grid integration.</p>
+        <ul>
+          <li>Ran 20+ hardware and software tests across system setups for predictive analysis of 10+ failure modes</li>
+          <li>Monitored 50+ alpha and beta installations and validated the system under real weather and grid conditions</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="sony">
+      <p class="when">May–Jun 2022</p>
+      <div>
+        <h3>Research Intern, Sony</h3>
+        <p class="where">Tokyo, Japan</p>
+        <p>An API connecting relational databases to visual navigation algorithms for large datasets.</p>
+        <ul>
+          <li>Integrated PostgreSQL with multi-threaded visual algorithms, eliminating mutex errors</li>
+          <li>Gained 8% computational efficiency for ORB-SLAM3 with the database integration API</li>
+          <li>Cut memory use, CPU utilization, latency and translation error by about 5% using a binary string datatype</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+  </main>
+  <footer>
+    <a href="mailto:sonara.aanal@gmail.com">sonara.aanal@gmail.com</a>
+    <a href="https://www.linkedin.com/in/aanal-sonara/">LinkedIn</a>
+    <a href="https://github.com/Aanal2901">GitHub</a>
+    <span>Updated October 2026</span>
+  </footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

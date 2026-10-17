@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Undergrad | Aanal Sonara</title>
+<meta name="description" content="B.Tech in Electrical Engineering at IIT Bombay, 2019–2023, most of it spent building drones with UMIC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="topbar" aria-label="Site">
+    <a class="home" href="index.html">Aanal Sonara</a>
+    <details class="menu">
+      <summary>Explore</summary>
+      <ul>
+        <li><a href="masters.html">Master's<span>2027</span></a></li>
+        <li><a href="experience.html">Professional Experience</a></li>
+        <li><a href="undergrad.html" aria-current="page">Undergrad<span>2023</span></a></li>
+        <li><a href="side-quests.html">Side quests</a></li>
+      </ul>
+    </details>
+  </nav>
+  <main>
+  <header class="page-head">
+    <h1>Undergrad</h1>
+  </header>
+  <section aria-labelledby="u-edu">
+    <h2 id="u-edu">Education</h2>
+    <article class="entry" id="iitb">
+      <p class="when">2019–2023</p>
+      <div>
+        <h3>B.Tech Electrical Engineering, IIT Bombay</h3>
+        <p class="where">Minor in AI &amp; Data Science</p>
+        <p>Coursework: Optimization in ML, Advanced ML, Advanced Methods in Satellite Image Processing, Markov Chains &amp; Queueing Systems, Automatic Speech Recognition, Natural Language Processing.</p>
+      </div>
+    </article>
+  </section>
+  <section aria-labelledby="u-umic">
+    <h2 id="u-umic">UMIC: aerial robotics team</h2>
+    <article class="entry" id="iarc">
+      <p class="when">Aug 2020–Aug 2022</p>
+      <div>
+        <h3>International Aerial Robotics Competition</h3>
+        <p class="where">UMIC, IIT Bombay</p>
+        <ul>
+          <li>Trained YOLOv4 on 10k+ simulated images and fine-tuned on 2k+ real images to close the sim-to-real gap</li>
+          <li>Reached 95% mAP at 0.5 IoU in real time (20 fps) on an NVIDIA Xavier NX</li>
+          <li>Optimized inference with TensorRT and NVDLA in C++ for 3× faster inference and lower CPU-GPU load</li>
+          <li>Developed a visuomotor controller to align a manipulator with a target object and perform a replacement task</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="deep-visual-slam">
+      <p class="when">Dec 2021–Apr 2022</p>
+      <div>
+        <h3>Deep visual SLAM</h3>
+        <p class="where">UMIC, IIT Bombay</p>
+        <ul>
+          <li>Built a ROS package that builds a 3D map and publishes real-time pose from a learned visual SLAM</li>
+          <li>Trained HFNet + NetVLAD feature description with a SuperPoint teacher on 100k images</li>
+          <li>Fine-tuned the SuperGlue graph neural network for feature matching (70% training accuracy)</li>
+          <li>Used linear PnP on ZED 2 image and depth data to build a sparse 3D map and compute drone pose</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="icuas">
+      <p class="when">Jan–Jun 2023</p>
+      <div>
+        <h3>ICUAS UAV Competition</h3>
+        <p class="where">UMIC, IIT Bombay</p>
+        <ul>
+          <li>Built obstacle avoidance and waypoint navigation to explore an unknown indoor environment</li>
+          <li>Tuned ORB-SLAM3 for localization in a semi-indoor environment with an Intel RGB-D sensor</li>
+          <li>Placed 1st in simulation and 3rd in hardware out of 39 teams worldwide (Warsaw, 2023)</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="umic-oc">
+      <p class="when">May 2022–May 2023</p>
+      <div>
+        <h3>Overall Coordinator, UMIC</h3>
+        <p class="where">IIT Bombay</p>
+        <ul>
+          <li>Led a 90-member funded student team building autonomous drones and cars</li>
+          <li>Managed operations, logistics, hardware and a budget of INR 2M+</li>
+          <li>Onboarded 5+ industry sponsors; raised INR 1.5M from IIT Bombay for IARC (2021) and INR 2M from alumni for the UAS Challenge (2023)</li>
+          <li>Represented the team at Techfest and Tech Expo, and built connections with 100+ professors, teams and alumni</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+  <section aria-labelledby="u-projects">
+    <h2 id="u-projects">Projects</h2>
+    <article class="entry" id="btp">
+      <p class="when">Aug 2022–Apr 2023</p>
+      <div>
+        <h3>Caption generation from satellite images</h3>
+        <p class="where">B.Tech project, Prof. B. Banerjee</p>
+        <ul>
+          <li>Fine-tuned CLIP on satellite image–caption pairs with a contrastive loss</li>
+          <li>Designed hierarchical feature extraction with a CLIP image encoder and GPT-2 text decoder</li>
+          <li>Grew the dataset by 50% with text augmentation and image processing</li>
+          <li>Raised caption accuracy and BLEU by 15% by pairing CLIP's encoder with an LSTM</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="medical-captioning">
+      <p class="when">Jan–Apr 2023</p>
+      <div>
+        <h3>Medical image captioning</h3>
+        <p class="where">Prof. Pushpak Bhattacharyya</p>
+        <ul>
+          <li>Built a ViT (patch16-224) encoder + GPT-2 decoder captioning model</li>
+          <li>Improved ROUGE by 15% with paraphrase and synonym augmentation</li>
+          <li>Generated reports 20% more accurately than an LSTM baseline</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="ensemble-attack">
+      <p class="when">Jan–Apr 2022</p>
+      <div>
+        <h3>Ensemble attack with linear backpropagation</h3>
+        <p class="where">Prof. Sunita Sarawagi</p>
+        <ul>
+          <li>Implemented linear BP with MI-FGSM for black-box adversarial attacks using a model ensemble</li>
+          <li>Reached up to 100% attack success on some models such as VGG19, with better transferability</li>
+        </ul>
+      </div>
+    </article>
+    <article class="entry" id="script-generator">
+      <p class="when">Jan–Apr 2021</p>
+      <div>
+        <h3>Script generator</h3>
+        <p class="where">Introduction to Machine Learning</p>
+        <ul>
+          <li>Generated short script scenes with GPT-2 trained on a dataset of 25,000+ unique words</li>
+          <li>Found higher KL divergence on common words in the fine-tuned model</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+  <section aria-labelledby="u-pubs">
+    <h2 id="u-pubs">Publication</h2>
+    <article class="entry" id="aerial-manipulation">
+      <p class="when">2021</p>
+      <div>
+        <h3><a href="http://www.aerialroboticscompetition.org/assets/downloads/2021SymposiumPapers/IndianInstituteofTechnologyBombay.pdf">A Novel Approach to Autonomous Aerial Manipulation using Multiple Drones</a></h3>
+        <p class="where">Agarwal, M., Sonara, A., et al. 12th Symposium on Dynamic Flight Behavior for Aerial Robotics</p>
+      </div>
+    </article>
+  </section>
+  <section aria-labelledby="u-awards">
+    <h2 id="u-awards">Awards</h2>
+    <article class="entry" id="aw-icuas">
+      <p class="when">2023</p>
+      <div>
+        <h3>1st in simulation, 3rd in hardware, ICUAS</h3>
+        <p class="where">Out of 39 teams worldwide, Warsaw</p>
+      </div>
+    </article>
+    <article class="entry" id="aw-uas">
+      <p class="when">2023</p>
+      <div>
+        <h3>Design, Scrutineering and Advancement Awards</h3>
+        <p class="where">UAS Challenge, UK</p>
+      </div>
+    </article>
+    <article class="entry" id="aw-iarc">
+      <p class="when">2022</p>
+      <div>
+        <h3>World Champions, IARC Mission 9 Simulation Challenge</h3>
+        <p class="where">International Aerial Robotics Competition</p>
+      </div>
+    </article>
+    <article class="entry" id="aw-asme">
+      <p class="when">2022</p>
+      <div>
+        <h3>World Rank 4, ASME Student Robotics Design Challenge</h3>
+        <p class="where">Among 100+ university teams</p>
+      </div>
+    </article>
+  </section>
+  </main>
+  <footer>
+    <a href="mailto:sonara.aanal@gmail.com">sonara.aanal@gmail.com</a>
+    <a href="https://www.linkedin.com/in/aanal-sonara/">LinkedIn</a>
+    <a href="https://github.com/Aanal2901">GitHub</a>
+    <span>Updated October 2026</span>
+  </footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
