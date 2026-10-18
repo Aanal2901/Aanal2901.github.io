@@ -8,6 +8,17 @@
   });
 })();
 
+// Open a project card when the URL points at it (e.g. undergrad.html#iarc)
+(() => {
+  const openTarget = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const el = id && document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') { el.open = true; el.scrollIntoView(); }
+  };
+  openTarget();
+  window.addEventListener('hashchange', openTarget);
+})();
+
 // Homepage hero: event-camera rendering of the name
 (() => {
   const box = document.getElementById('sensor');

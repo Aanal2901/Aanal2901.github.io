@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Undergrad | Aanal Sonara</title>
-<meta name="description" content="B.Tech in Electrical Engineering at IIT Bombay, 2019–2023, most of it spent building drones with UMIC.">
+<meta name="description" content="B.Tech in Electrical Engineering at IIT Bombay, 2019–2023.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -39,46 +39,102 @@
       </div>
     </article>
   </section>
-  <section aria-labelledby="u-umic">
-    <h2 id="u-umic">UMIC: aerial robotics team</h2>
-    <article class="entry" id="iarc">
-      <p class="when">Aug 2020–Aug 2022</p>
-      <div>
-        <h3>International Aerial Robotics Competition</h3>
-        <p class="where">UMIC, IIT Bombay</p>
-        <ul>
-          <li>Trained YOLOv4 on 10k+ simulated images and fine-tuned on 2k+ real images to close the sim-to-real gap</li>
-          <li>Reached 95% mAP at 0.5 IoU in real time (20 fps) on an NVIDIA Xavier NX</li>
-          <li>Optimized inference with TensorRT and NVDLA in C++ for 3× faster inference and lower CPU-GPU load</li>
-          <li>Developed a visuomotor controller to align a manipulator with a target object and perform a replacement task</li>
-        </ul>
+  <section aria-labelledby="u-comp">
+    <h2 id="u-comp">Competitions with UMIC</h2>
+    <div class="cards">
+    <details class="card" id="iarc">
+      <summary>
+        <h3>International Aerial Robotics Competition (IARC)</h3>
+        <span class="card-meta">Association for Uncrewed Vehicle Systems International (AUVSI)<br>Mission 9 simulation and hardware rounds, 2020–2022</span>
+      </summary>
+      <div class="card-body">
+      <h4>Simulation round, 2020</h4><p>The Mission 9 simulation challenge was a rapid object-replacement task over long distances. We built a mother–daughter drone pair. The mothership flew at 20 m/s, so we localized it with RTK GPS. For the daughter drone, I implemented visual SLAM for accurate localization: I fused a 1D lidar with SLAM along the z-axis and tuned ORB-SLAM2's hyperparameters to avoid tracking loss, reducing error by 62.5%. We ran extensive simulations in Gazebo with ROS, and I trained a YOLOv4-tiny model on our own datasets for object tracking. The full simulation was hosted on GzWeb, and localization ran at 23 fps. When results came out in 2021, we were declared world champions of the simulation round.</p><h4>Hardware round, 2021–2022</h4><p>I deployed the algorithms on an NVIDIA Xavier NX. The real world varies far more than simulation, so I switched to the full YOLOv4 model and retrained it on our real-world datasets. Localization stayed on ORB-SLAM2 with some fine-tuning. Initial tests ran at only 7 fps; after I optimized inference with TensorRT it reached 15 fps, enough for real-time operation. We also implemented plane segmentation and pose estimation for the target object so the drone could align precisely and perform the replacement.</p>
+      <div class="card-media"><figure><img src="assets/drone1.jpg" alt="IARC mother drone" loading="lazy"><figcaption>IARC mother drone</figcaption></figure><figure><img src="assets/drone2.jpg" alt="IARC mother drone" loading="lazy"><figcaption>IARC mother drone</figcaption></figure><figure><video src="assets/replacement_mech.mp4" poster="assets/replacement_mech-poster.jpg" controls preload="none" playsinline></video><figcaption>Custom replacement mechanism</figcaption></figure><figure><video src="assets/WhatsApp%20Video%202024-11-04%20at%2019.50.26_64c423ba.mp4" poster="assets/iarc-flight-test-poster.jpg" controls preload="none" playsinline></video><figcaption>Drone flight testing</figcaption></figure></div>
       </div>
-    </article>
-    <article class="entry" id="deep-visual-slam">
-      <p class="when">Dec 2021–Apr 2022</p>
-      <div>
+    </details>
+    <details class="card" id="icuas-2023">
+      <summary>
+        <h3>ICUAS UAV Competition: crack detection</h3>
+        <span class="card-meta">International Conference on Unmanned Aircraft Systems (ICUAS)<br>2023</span>
+      </summary>
+      <div class="card-body">
+      <p>The task was to explore an area, detect cracks in building walls and structures, and localize them.</p><h4>Crack detection</h4><p>I trained a YOLOv4-tiny model on a crack dataset, deployed it on the onboard Intel NUC and optimized it with OpenVINO.</p><h4>Pose estimation</h4><p>We localized the UAV with ORB-SLAM3 on an Intel RealSense camera, processing RGB, depth and IMU data. Crack positions relative to the UAV came from the RealSense depth data.</p>
+      </div>
+    </details>
+    <details class="card" id="icuas-2022">
+      <summary>
+        <h3>ICUAS UAV Competition: indoor fire rescue</h3>
+        <span class="card-meta">International Conference on Unmanned Aircraft Systems (ICUAS)<br>2022</span>
+      </summary>
+      <div class="card-body">
+      <p>A rescue mission inside a burning building: the drone explores an indoor area, detects an ArUco marker standing in for the fire, and launches a ball of water to put it out. Our solution had three parts: exploration, target tracking and ball launch. Localization used motion capture.</p><h4>Exploration</h4><p>The algorithm identifies frontiers, the boundaries between explored and unexplored space, and prioritizes those that maximize coverage with minimal movement, so the drone expands the explored area in a logical order.</p><h4>ArUco marker detection</h4><p>Markers are found with contour detection and a set of checks on a processed image that highlights contours, plus a consistency check to reject spurious detections.</p><h4>Obstacle detection and avoidance</h4><p>I added real-time obstacle detection to the exploration algorithm using an RGB-D camera. When a collision is likely, the drone reroutes to an alternate path toward the nearest frontier, so exploration continues without interruption.</p><h4>Waypoint navigation</h4><p>Waypoints come from the exploration algorithm. Each is an intermediate target based on the current frontiers and ArUco cues, giving precise control over the drone's path.</p><h4>Communication</h4><p>Sensors, control and computation are integrated in ROS, with each task running as an independent node.</p>
+      </div>
+    </details>
+    <details class="card" id="deep-visual-slam">
+      <summary>
         <h3>Deep visual SLAM</h3>
-        <p class="where">UMIC, IIT Bombay</p>
-        <ul>
-          <li>Built a ROS package that builds a 3D map and publishes real-time pose from a learned visual SLAM</li>
-          <li>Trained HFNet + NetVLAD feature description with a SuperPoint teacher on 100k images</li>
-          <li>Fine-tuned the SuperGlue graph neural network for feature matching (70% training accuracy)</li>
-          <li>Used linear PnP on ZED 2 image and depth data to build a sparse 3D map and compute drone pose</li>
-        </ul>
+        <span class="card-meta">UMIC, IIT Bombay<br>Dec 2021–Apr 2022</span>
+      </summary>
+      <div class="card-body">
+      <ul><li>Built a ROS package that builds a 3D map and publishes real-time pose from a learned visual SLAM</li><li>Trained HFNet + NetVLAD feature description with a SuperPoint teacher on 100k images</li><li>Fine-tuned the SuperGlue graph neural network for feature matching (70% training accuracy)</li><li>Used linear PnP on ZED 2 image and depth data to build a sparse 3D map and compute drone pose</li></ul>
       </div>
-    </article>
-    <article class="entry" id="icuas">
-      <p class="when">Jan–Jun 2023</p>
-      <div>
-        <h3>ICUAS UAV Competition</h3>
-        <p class="where">UMIC, IIT Bombay</p>
-        <ul>
-          <li>Built obstacle avoidance and waypoint navigation to explore an unknown indoor environment</li>
-          <li>Tuned ORB-SLAM3 for localization in a semi-indoor environment with an Intel RGB-D sensor</li>
-          <li>Placed 1st in simulation and 3rd in hardware out of 39 teams worldwide (Warsaw, 2023)</li>
-        </ul>
+    </details>
+    </div>
+  </section>
+  <section aria-labelledby="u-projects">
+    <h2 id="u-projects">Academic projects</h2>
+    <div class="cards">
+    <details class="card" id="btp">
+      <summary>
+        <h3>Satellite image caption generation</h3>
+        <span class="card-meta">B.Tech project (BTP), guide: Prof. Biplab Banerjee<br>Academic year 2022–2023</span>
+      </summary>
+      <div class="card-body">
+      <p>The first part of the project was to pick a multimodal problem. I chose satellite image captioning, which can also support image classification. After a literature review I settled on fine-tuning CLIP, one of the best-performing models for the task. I studied the CLIP architecture and fine-tuned it on satellite images by minimizing the contrastive loss, using the Remote Sensing Image Captioning Dataset (RSICD).</p><p>In the second part I pivoted to caption generation and scene understanding. I designed a new architecture that extracts hierarchical image features from the CLIP image encoder and projects them into a common space jointly trained with a GPT-2 decoder to minimize contrastive loss; once the weights were learned on satellite images, I used it for caption generation. I grew the dataset by 50% with caption augmentation through the OpenAI GPT API and preprocessed the images (resizing, normalization) to improve training efficiency. I then built a new architecture with CLIP's modified encoder and trained an LSTM decoder for caption generation, starting with the Flickr8k caption dataset.</p>
       </div>
-    </article>
+    </details>
+    <details class="card" id="medical-captioning">
+      <summary>
+        <h3>Medical image caption generator</h3>
+        <span class="card-meta">CS772: Deep Learning for Natural Language Processing, guide: Prof. Pushpak Bhattacharyya<br>Spring 2023</span>
+      </summary>
+      <div class="card-body">
+      <p>The goal was to generate concise medical reports from chest X-rays. I used 14k images (224×224×3) from Indiana University Hospital, preprocessed them, and enlarged the dataset with OpenAI paraphrasing and WordNet synonyms for fine-tuning.</p><p>The model pairs a Vision Transformer (ViT-patch16-224) encoder with a GPT-2 decoder. In PyTorch, I compared ViT + LSTM against ViT + GPT-2, each with and without fine-tuning on the augmented data. The fine-tuned ViT + GPT-2 model produced the most accurate and realistic reports, especially after augmentation, which improved its grasp of medical terminology. ROUGE bigram scores improved by 20% and F1 by 15%, showing that fine-tuning brings generated reports much closer to actual findings, which matters most in niche domains.</p>
+      <p class="card-links"><a href="https://github.com/Aanal2901/Medical-Image-Caption-Generator">Code</a></p>
+      </div>
+    </details>
+    <details class="card" id="ensemble-attack">
+      <summary>
+        <h3>Ensemble attack using linear backpropagation</h3>
+        <span class="card-meta">CS726: Advanced Machine Learning, guide: Prof. Sunita Sarawagi<br>Spring 2022</span>
+      </summary>
+      <div class="card-body">
+      <p>Adversarial attacks add perturbations to input data so that a model predicts incorrectly; how the perturbation is built depends on the attacker's access to the victim model. In a black-box setting, the most an attacker sees is the prediction confidence. The aim was a single black-box attack that works against many different victim models.</p><p>I combined linear backpropagation with the Momentum Iterative Fast Gradient Sign Method (MI-FGSM) and ran the attack with an ensemble of models. It reached over 80% success against image classifiers such as ResNet, WRN and DenseNet, and 100% against VGG19, substantially improving the transferability of black-box attacks. The same method can be built into training to make prediction models more robust.</p>
+      </div>
+    </details>
+    <details class="card" id="script-generator">
+      <summary>
+        <h3>Script generator</h3>
+        <span class="card-meta">DS303: Introduction to Machine Learning, guide: Prof. Biplab Banerjee<br>Spring 2021</span>
+      </summary>
+      <div class="card-body">
+      <p>The course covered the basics of ML and deep learning and architectures such as CNNs and LSTMs. The project was to generate short script scenes with a fine-tuned GPT-2, in three stages: pretrained GPT-2, GPT-2 trained only on scripts, and GPT-2 fine-tuned on short scripts (the first 300 words of each).</p><p>I built it with the Hugging Face library in Python, on a dataset of 60 screenplays from IMSDb with over 25,000 unique words. Given a prompt, the generated scenes were qualitatively good and realistic. The KL divergence of common words was higher in the fine-tuned model, since those words are more frequent in romance, the genre of my dataset.</p>
+      <p class="card-links"><a href="https://github.com/Aanal2901/ScreenPlay-Script-generator-using-NLP">Code</a></p>
+      </div>
+    </details>
+    <details class="card" id="quadtree">
+      <summary>
+        <h3>Quadtree segmentation</h3>
+        <span class="card-meta">GNR602: Advanced Methods in Satellite Image Processing, guide: Prof. Mohan B. Krishna</span>
+      </summary>
+      <div class="card-body">
+      <p>The goal was to partition images into meaningful regions for applications such as object detection and medical imaging. A quadtree recursively splits an image into four quadrants based on pixel-intensity differences: if a region's difference exceeds a threshold it is split again; otherwise its mean or min/max pixel value is computed and stored.</p><p>I implemented the algorithm to adapt to different thresholds and applied it to satellite imagery (finding roads or forests) and medical imaging (locating tumors). The approach is sensitive to shifts and produces variable block sizes, which limits shape analysis and pattern recognition, but it worked well for image compression and for segmenting medical and satellite images.</p>
+      </div>
+    </details>
+    </div>
+  </section>
+  <section aria-labelledby="u-lead">
+    <h2 id="u-lead">Leadership</h2>
     <article class="entry" id="umic-oc">
       <p class="when">May 2022–May 2023</p>
       <div>
@@ -89,56 +145,6 @@
           <li>Managed operations, logistics, hardware and a budget of INR 2M+</li>
           <li>Onboarded 5+ industry sponsors; raised INR 1.5M from IIT Bombay for IARC (2021) and INR 2M from alumni for the UAS Challenge (2023)</li>
           <li>Represented the team at Techfest and Tech Expo, and built connections with 100+ professors, teams and alumni</li>
-        </ul>
-      </div>
-    </article>
-  </section>
-  <section aria-labelledby="u-projects">
-    <h2 id="u-projects">Projects</h2>
-    <article class="entry" id="btp">
-      <p class="when">Aug 2022–Apr 2023</p>
-      <div>
-        <h3>Caption generation from satellite images</h3>
-        <p class="where">B.Tech project, Prof. B. Banerjee</p>
-        <ul>
-          <li>Fine-tuned CLIP on satellite image–caption pairs with a contrastive loss</li>
-          <li>Designed hierarchical feature extraction with a CLIP image encoder and GPT-2 text decoder</li>
-          <li>Grew the dataset by 50% with text augmentation and image processing</li>
-          <li>Raised caption accuracy and BLEU by 15% by pairing CLIP's encoder with an LSTM</li>
-        </ul>
-      </div>
-    </article>
-    <article class="entry" id="medical-captioning">
-      <p class="when">Jan–Apr 2023</p>
-      <div>
-        <h3>Medical image captioning</h3>
-        <p class="where">Prof. Pushpak Bhattacharyya</p>
-        <ul>
-          <li>Built a ViT (patch16-224) encoder + GPT-2 decoder captioning model</li>
-          <li>Improved ROUGE by 15% with paraphrase and synonym augmentation</li>
-          <li>Generated reports 20% more accurately than an LSTM baseline</li>
-        </ul>
-      </div>
-    </article>
-    <article class="entry" id="ensemble-attack">
-      <p class="when">Jan–Apr 2022</p>
-      <div>
-        <h3>Ensemble attack with linear backpropagation</h3>
-        <p class="where">Prof. Sunita Sarawagi</p>
-        <ul>
-          <li>Implemented linear BP with MI-FGSM for black-box adversarial attacks using a model ensemble</li>
-          <li>Reached up to 100% attack success on some models such as VGG19, with better transferability</li>
-        </ul>
-      </div>
-    </article>
-    <article class="entry" id="script-generator">
-      <p class="when">Jan–Apr 2021</p>
-      <div>
-        <h3>Script generator</h3>
-        <p class="where">Introduction to Machine Learning</p>
-        <ul>
-          <li>Generated short script scenes with GPT-2 trained on a dataset of 25,000+ unique words</li>
-          <li>Found higher KL divergence on common words in the fine-tuned model</li>
         </ul>
       </div>
     </article>
@@ -158,21 +164,21 @@
     <article class="entry" id="aw-icuas">
       <p class="when">2023</p>
       <div>
-        <h3>1st in simulation, 3rd in hardware, ICUAS</h3>
+        <h3><a href="https://larics.fer.hr/larics/news_new?@=2y5uu">1st in simulation, 3rd in hardware, ICUAS</a></h3>
         <p class="where">Out of 39 teams worldwide, Warsaw</p>
       </div>
     </article>
     <article class="entry" id="aw-uas">
       <p class="when">2023</p>
       <div>
-        <h3>Design, Scrutineering and Advancement Awards</h3>
+        <h3><a href="https://www.imeche.org/events/challenges/uas-challenge/past-events">Design, Scrutineering and Advancement Awards</a></h3>
         <p class="where">UAS Challenge, UK</p>
       </div>
     </article>
     <article class="entry" id="aw-iarc">
       <p class="when">2022</p>
       <div>
-        <h3>World Champions, IARC Mission 9 Simulation Challenge</h3>
+        <h3><a href="http://www.aerialroboticscompetition.org/simulation_challenge.php">World Champions, IARC Mission 9 Simulation Challenge</a></h3>
         <p class="where">International Aerial Robotics Competition</p>
       </div>
     </article>

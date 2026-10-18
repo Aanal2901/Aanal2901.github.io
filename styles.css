@@ -133,6 +133,48 @@ h2 {
 .hl p { margin: 0.5rem 0 0; font-size: 0.9875rem; }
 .hl .result { color: var(--on); font-weight: 500; }
 
+/* Expandable project cards */
+.cards { display: grid; gap: 0.75rem; }
+.card {
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 8px;
+  scroll-margin-top: 1.5rem;
+}
+.card[open] { border-color: color-mix(in srgb, var(--on) 45%, var(--rule)); }
+.card summary {
+  list-style: none; cursor: pointer;
+  position: relative; padding: 1rem 3rem 1rem 1.2rem;
+}
+.card summary::-webkit-details-marker { display: none; }
+.card summary::after {
+  content: ""; position: absolute; right: 1.2rem; top: 1.35rem;
+  width: 0.55rem; height: 0.55rem;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg); transition: transform 0.15s;
+}
+.card[open] summary::after { transform: rotate(-135deg); top: 1.6rem; }
+.card summary:hover h3 { color: var(--on); }
+.card summary:focus-visible { outline: 2px solid var(--on); outline-offset: 2px; border-radius: 8px; }
+.card h3 { font-size: 1.0625rem; line-height: 1.35; margin: 0; }
+.card-meta { display: block; color: var(--muted); font-size: 0.9375rem; margin-top: 0.2rem; line-height: 1.45; }
+.card-result { display: block; color: var(--on); font-weight: 500; font-size: 0.9375rem; margin-top: 0.35rem; }
+.card-body { padding: 0 1.2rem 1.2rem; border-top: 1px solid var(--rule); }
+.card-body h4 { font-size: 0.9375rem; font-weight: 700; margin: 1.1rem 0 0; }
+.card-body p { margin: 0.6rem 0 0; }
+.card-body h4 + p { margin-top: 0.2rem; }
+.card-body > p:first-child, .card-body > h4:first-child { margin-top: 1rem; }
+.card-body ul { margin: 1rem 0 0; padding-left: 1.1rem; }
+.card-body li { margin: 0.2rem 0; }
+.card-media { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.6rem; margin-top: 1.1rem; }
+.card-media figure { margin: 0; }
+.card-media img, .card-media video { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--bg); }
+.card-media video { object-fit: contain; background: #000; }
+.card-media.portrait { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 600px) { .card-media.portrait { grid-template-columns: repeat(2, 1fr); } }
+.card-media.portrait video { aspect-ratio: 9 / 16; }
+.entry .card-media { margin-top: 0.9rem; }
+.card-media figcaption { color: var(--muted); font-size: 0.8125rem; margin-top: 0.3rem; }
+.card-links { margin-top: 1rem; display: flex; gap: 1.25rem; font-weight: 500; }
+
 .note { color: var(--muted); }
 
 @media (max-width: 600px) {
@@ -150,5 +192,5 @@ footer {
 footer a { color: var(--muted); }
 
 @media (prefers-reduced-motion: reduce) {
-  .menu summary::after { transition: none; }
+  .menu summary::after, .card summary::after { transition: none; }
 }

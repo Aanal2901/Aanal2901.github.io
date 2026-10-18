@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Side quests | Aanal Sonara</title>
-<meta name="description" content="Things I make and do away from the lab.">
+<meta name="description" content="Course and summer projects outside my main research area.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -28,23 +28,56 @@
   <header class="page-head">
     <h1>Side quests</h1>
   </header>
-  <section aria-labelledby="s-list">
-    <h2 id="s-list">Away from the lab</h2>
-    <article class="entry solo" id="synth">
-      <div>
-        <h3>Playing synthesizer</h3>
+  <section aria-labelledby="s-projects">
+    <h2 id="s-projects">Projects</h2>
+    <div class="cards">
+    <details class="card" id="water-tank">
+      <summary>
+        <h3>Rooftop water tank level management system</h3>
+        <span class="card-meta">EE344: Electronic Design Lab, guide: Prof. Joseph John</span>
+      </summary>
+      <div class="card-body">
+      <p>The goal was to detect overflow while a rooftop tank fills and stop water being wasted. We built a low-cost level management system with an IP66-rated ultrasonic sensor and a microswitch. The ultrasonic sensor detects when the tank reaches 90% capacity, and a mechanical microswitch registers overflow once a 110 mL container fills.</p><p>We also built an Android app with MIT App Inventor so residents can see the water level in real time, and an LED board at the rooftop showing the level as a percentage (reduced to a 6-LED design because of load limits on the ESP microcontroller).</p>
       </div>
-    </article>
-    <article class="entry solo" id="reading">
-      <div>
-        <h3>Reading novels</h3>
+    </details>
+    <details class="card" id="kitchen-knife">
+      <summary>
+        <h3>Kitchen knife, redesigned</h3>
+        <span class="card-meta">DE414: Innovation by Design, guide: Prof. B. K. Chakravarthy</span>
+      </summary>
+      <div class="card-body">
+      <p>A vegetable cutter for elderly users with limited hand strength and dexterity. We interviewed older people to understand their difficulties and gathered their feedback on our designs. The final design addresses common problems with handling and cutting hard fruits and vegetables, focusing on ease of use, maintenance and safety. We built a mockup and tested it for comfort and function.</p>
       </div>
-    </article>
-    <article class="entry solo" id="cooking">
-      <div>
-        <h3>Cooking</h3>
+    </details>
+    <details class="card" id="iot-smart-grid">
+      <summary>
+        <h3>IoT in smart grids and smart homes</h3>
+        <span class="card-meta">EE706: Communication Networks, guide: Prof. Gaurav S. Kasbekar</span>
+      </summary>
+      <div class="card-body">
+      <p>An analysis of security challenges in smart grid and smart home systems, with potential solutions. The smart grid model uses a multilayer architecture to manage power distribution, and smart homes use an energy management system (EMS) to optimize internal power use.</p><p>I reviewed the literature on authorization and availability in the smart grid. The project groups threats to smart grids and smart homes by security goal and surveys existing countermeasures, such as intrusion detection systems and data encryption, that protect consumer privacy and prevent attacks like jamming. My review highlighted the potential of cloud-based solutions for scalability while keeping security, along with challenges like efficient access control for large user bases.</p>
       </div>
-    </article>
+    </details>
+    <details class="card" id="virtual-keyboard">
+      <summary>
+        <h3>Virtual keyboard</h3>
+        <span class="card-meta">Summer project<br>Summer 2020</span>
+      </summary>
+      <div class="card-body">
+      <p>Typing on a laser-projected or paper keyboard lying on a flat surface in view of a laptop camera. I devised an OpenCV algorithm that detects a finger actually pressing a key rather than hovering over it, segmenting the input with image processing. It ran in real time, detecting touches and recognizing the pressed key with a convolutional neural network.</p>
+      </div>
+    </details>
+    <details class="card" id="qa-model">
+      <summary>
+        <h3>Conversational question answering</h3>
+        <span class="card-meta">Summer project<br>Summer 2021</span>
+      </summary>
+      <div class="card-body">
+      <p>I studied sequence models on Coursera and, after covering RNNs, LSTMs, GRUs and Transformers, extended the coursework into a Transformer project: a question-answering system with BERT as the head of the model.</p><p>I used SQuAD, with 100k+ question–answer pairs, and a pretrained BERT tokenizer to preprocess inputs made of a paragraph and a question; the output is the span of the paragraph that answers it. The model reached an exact-match score of 0.77 and an average F1 of 0.86 on the SQuAD 2.0 evaluation set.</p>
+      <p class="card-links"><a href="https://github.com/Aanal2901/Question_Answering-Model-GPT2">Code</a></p>
+      </div>
+    </details>
+    </div>
   </section>
   </main>
   <footer>
