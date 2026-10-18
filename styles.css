@@ -166,6 +166,8 @@ h2 {
 .card-body li { margin: 0.2rem 0; }
 .card-media { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.6rem; margin-top: 1.1rem; }
 .card-media figure { margin: 0; }
+.card-media figure.wide { grid-column: 1 / -1; }
+.card-media iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 6px; background: #000; }
 .card-media img, .card-media video { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--bg); }
 .card-media video { object-fit: contain; background: #000; }
 .card-media.portrait { grid-template-columns: repeat(4, 1fr); }
